@@ -31,7 +31,25 @@ class EightPuzzleState(State):
 
     # returns the set of legal actions in the current state
     def possibleActions(self):
-         # TO COMPLETE
+        #find position of 0 in numbers
+        num = self.numbers.index(0)
+        
+        #left
+        if num % 3 != 0:
+            pass
+        
+        #right
+        
+        if num % 3 != 2:
+            pass
+        #up
+        
+        if num < 2:
+            pass
+        #down
+        
+        if num > 5:
+            pass
 
 
     # applies the result of the move on the current state
