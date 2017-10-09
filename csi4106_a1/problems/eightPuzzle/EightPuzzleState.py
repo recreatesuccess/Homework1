@@ -17,13 +17,16 @@ class EightPuzzleState(State):
 
     #initializes the eight puzzle with the configuration passed in parameter (numbers)
     def __init__(self, numbers):
-       # TO COMPLETE
+       self.numbers = numbers
 
 
 
     #returns a boolean value that indicates if the current configuration is the same as the goal configuration
     def isGoal(self):
-        # TO COMPLETE
+        if self.numbers == [0,1,2,3,4,5,6,7,8,9]:
+            return true
+        else:
+            return false
 
 
     # returns the set of legal actions in the current state
@@ -38,7 +41,10 @@ class EightPuzzleState(State):
 
     # returns true if the current state is the same as other, false otherwise
     def equals(self, other):
-    # TO COMPLETE
+    if self.numbers == other.numbers:
+        return true
+    else:
+        return false
 
 
     # prints the grid representing the current state
