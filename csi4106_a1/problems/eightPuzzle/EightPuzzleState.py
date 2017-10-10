@@ -17,13 +17,13 @@ class EightPuzzleState(State):
 
     #initializes the eight puzzle with the configuration passed in parameter (numbers)
     def __init__(self, numbers):
-       self.numbers = numbers
+        self.numbers = numbers
 
 
 
     #returns a boolean value that indicates if the current configuration is the same as the goal configuration
     def isGoal(self):
-        if self.numbers == [0,1,2,3,4,5,6,7,8,9]:
+        if self.numbers == [0,1,2,3,4,5,6,7,8]:
             return true
         else:
             return false
@@ -31,30 +31,57 @@ class EightPuzzleState(State):
 
     # returns the set of legal actions in the current state
     def possibleActions(self):
+        possible = []
+        
         #find position of 0 in numbers
         num = self.numbers.index(0)
         
         #left
         if num % 3 != 0:
-            pass
+            possible.append('left')
         
         #right
-        
         if num % 3 != 2:
-            pass
+            possible.append('right')
+            
         #up
-        
         if num < 2:
-            pass
-        #down
+            possible.append('up')
         
+        #down
         if num > 5:
-            pass
+            possible.append('down')
 
 
     # applies the result of the move on the current state
     def executeAction(self, move):
-        # TO COMPLETE
+        
+        newState = EightPuzzleState(self.numbers)
+        
+        if move == 'left':
+            tempindex = self.numbers.index(0)
+            newState.numbers[tempindex]=self.numbers[tempindex - 1]
+            newState.numbers[tempindex - 1]=0
+        
+        else if move == 'right':
+            tempindex = self.numbers.index(0)
+            newState.numbers[tempindex]=self.numbers[tempindex + 1]
+            newState.numbers[tempindex + 1]=0
+        
+        else if move == 'up':
+            tempindex = self.numbers.index(0)
+            newState.numbers[tempindex]=self.numbers[tempindex - 3]
+            newState.numbers[tempindex - 3]=0
+        
+        else if move == 'down':
+            tempindex = self.numbers.index(0)
+            newState.numbers[tempindex]=self.numbers[tempindex + 3]
+            newState.numbers[tempindex + 3]=0
+        
+        else:
+            raise "illegal move"
+            
+        return newState
 
 
     # returns true if the current state is the same as other, false otherwise
@@ -83,6 +110,7 @@ class EightPuzzleState(State):
     # returns the cost of the action in parameter
     def cost(self, action):
     # TO COMPLETE
+    return 1
 
     # returns the value of the heuristic for the current state
     # note that you can alternatively call heuristic1() and heuristic2() to test both heuristics with A*
@@ -94,13 +122,23 @@ class EightPuzzleState(State):
     ## returns the value of your first heuristic for the current state
     # make sure to explain it clearly in your comment
     def heuristic1(self):
-        # TO COMPLETE
+        #this is the manhattan distnace
+        dist = 0
+
+        for i in range(len(self.numbers)):
+            dist += (i%3) - (self.numbers.index(i)%3)
+            
+            dist += int(i/3) - int(self.numbers.index(i)/3)
+            
+        return dist
+            
+            
 
 
     # returns the value of your first heuristic for the current state
     # make sure to explain it clearly in your comment
     def heuristic2(self, matrix, goal):
-        # TO COMPLETE
+        return 0
 
 
 ####################### SOLVABILITY ###########################

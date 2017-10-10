@@ -20,6 +20,8 @@ def breadthfirst_search(initialState):
         add edge vw to T
     '''
     
+    nodesvisited = 0
+    
     T = node (initialState)
     
     Q = Queue()
@@ -33,7 +35,11 @@ def breadthfirst_search(initialState):
         for w in v.state.possibleActions():
             
             N = node(w,True,v.getcost()+1,v)
+            nodesvisited++
             Q.enqueue(N)
+            
+            if N.state.isgoal():
+                return N, nodesvisited
             
     
 
