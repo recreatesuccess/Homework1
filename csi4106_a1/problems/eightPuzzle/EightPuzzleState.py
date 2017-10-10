@@ -59,10 +59,10 @@ class EightPuzzleState(State):
 
     # returns true if the current state is the same as other, false otherwise
     def equals(self, other):
-    if self.numbers == other.numbers:
-        return true
-    else:
-        return false
+        if self.numbers == other.numbers:
+            return true
+        else:
+            return false
 
 
     # prints the grid representing the current state
@@ -75,6 +75,10 @@ class EightPuzzleState(State):
         # -----------
     def show(self):
     # TO COMPLETE
+        print("-----------") 
+        for i in range (3):
+            print("|"+self.numbers[i*3+1]+"|"+self.numbers[i*3+2]+"|"+self.numbers[i*3+3]+"|")
+        print("-----------")
 
     # returns the cost of the action in parameter
     def cost(self, action):
