@@ -34,7 +34,11 @@ def breadthfirst_search(initialState):
         
         for w in v.state.possibleActions():
             
-            N = node(w,True,v.getcost()+1,v)
+            N = node(v.executeAction(w),w,v.getcost()+1,v)
+            
+            if N.isRepeated():
+                continue 
+                
             nodesvisited++
             Q.enqueue(N)
             

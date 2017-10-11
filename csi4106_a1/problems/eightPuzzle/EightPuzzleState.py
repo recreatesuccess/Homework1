@@ -24,9 +24,9 @@ class EightPuzzleState(State):
     #returns a boolean value that indicates if the current configuration is the same as the goal configuration
     def isGoal(self):
         if self.numbers == [0,1,2,3,4,5,6,7,8]:
-            return true
+            return True
         else:
-            return false
+            return False
 
 
     # returns the set of legal actions in the current state
@@ -63,17 +63,17 @@ class EightPuzzleState(State):
             newState.numbers[tempindex]=self.numbers[tempindex - 1]
             newState.numbers[tempindex - 1]=0
         
-        else if move == 'right':
+        elif move == 'right':
             tempindex = self.numbers.index(0)
             newState.numbers[tempindex]=self.numbers[tempindex + 1]
             newState.numbers[tempindex + 1]=0
         
-        else if move == 'up':
+        elif move == 'up':
             tempindex = self.numbers.index(0)
             newState.numbers[tempindex]=self.numbers[tempindex - 3]
             newState.numbers[tempindex - 3]=0
         
-        else if move == 'down':
+        elif move == 'down':
             tempindex = self.numbers.index(0)
             newState.numbers[tempindex]=self.numbers[tempindex + 3]
             newState.numbers[tempindex + 3]=0
@@ -87,9 +87,9 @@ class EightPuzzleState(State):
     # returns true if the current state is the same as other, false otherwise
     def equals(self, other):
         if self.numbers == other.numbers:
-            return true
+            return True
         else:
-            return false
+            return False
 
 
     # prints the grid representing the current state
@@ -110,7 +110,7 @@ class EightPuzzleState(State):
     # returns the cost of the action in parameter
     def cost(self, action):
     # TO COMPLETE
-    return 1
+        return 1
 
     # returns the value of the heuristic for the current state
     # note that you can alternatively call heuristic1() and heuristic2() to test both heuristics with A*
