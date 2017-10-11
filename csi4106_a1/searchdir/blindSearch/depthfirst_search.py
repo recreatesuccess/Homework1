@@ -22,7 +22,10 @@ def depthfirst_search(initialState):
     '''
     nodesvisited = 0
     
-    T = node (initialState)
+    T = Node (initialState)
+
+    if T.state.isGoal():
+        return T, nodesvisited
     
     S = Stack()
     
@@ -34,15 +37,23 @@ def depthfirst_search(initialState):
         
         for w in v.state.possibleActions():
             
-            N = Node(v.executeAction(w),w,v.getcost()+1,v)
-            
+            N = Node(v.state.executeAction(w),w,v.getcost()+1,v)
+
+            if N.g>900:
+                print ("recursion depth exceeded")
+                return None, nodesvisited
+
             if N.isRepeated():
                 continue 
                 
             nodesvisited+=1
             S.push(N)
             
-            if N.state.isgoal():
+            if N.state.isGoal():
                 return N, nodesvisited
+
+    print ("solution not found")
+
+    return None, None
     
     

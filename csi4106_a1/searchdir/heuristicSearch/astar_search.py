@@ -7,11 +7,14 @@ from searchdir.util import PriorityQueue
 ## It must return the solution node and the number of visited nodes
 def astar_search(initialState):
     print('A* ------------------------------------')
-// A* Search Algorithm
+    # A* Search Algorithm
 
     nodesvisited = 0
     
-    T = node (initialState)
+    T = Node (initialState)
+
+    if T.state.isGoal():
+        return T, nodesvisited
     
     Q = PriorityQueue()
     
@@ -22,13 +25,21 @@ def astar_search(initialState):
         v = Q.dequeue()
         
         for w in v.state.possibleActions():
-            
-            N = node(w,True,v.getcost()+1,v)
+
+            N = Node(v.state.executeAction(w), w, v.getcost() + 1, v)
+
+            if N.isRepeated():
+                continue
+
             nodesvisited+=1
             Q.enqueue(N)
             
-            if N.state.isgoal():
+            if N.state.isGoal():
                 return N, nodesvisited
+
+    print ("no solution found")
+
+    return  None, None
     
     
     

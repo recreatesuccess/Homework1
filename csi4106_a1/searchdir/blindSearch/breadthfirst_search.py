@@ -23,6 +23,9 @@ def breadthfirst_search(initialState):
     nodesvisited = 0
     
     T = Node (initialState)
+
+    if T.state.isGoal():
+        return T, nodesvisited
     
     Q = Queue()
     
@@ -31,19 +34,29 @@ def breadthfirst_search(initialState):
     while not Q.isEmpty():
         
         v = Q.dequeue()
-        
+        #print ("v state")
+        #v.state.show()
+        #print (v.state.possibleActions())
         for w in v.state.possibleActions():
+
+            #print ("w:",str(w))
             
-            N = Node(v.executeAction(w),w,v.getcost()+1,v)
+            N = Node(v.state.executeAction(w),w,v.getcost()+1,v)
             
             if N.isRepeated():
+                #print ("N was repeated")
+                #N.state.show()
                 continue 
                 
             nodesvisited+=1
             Q.enqueue(N)
             
-            if N.state.isgoal():
+            if N.state.isGoal():
                 return N, nodesvisited
+
+    print ("did not find solution")
+
+    return None, None
             
     
 

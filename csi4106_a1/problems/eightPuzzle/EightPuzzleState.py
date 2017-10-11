@@ -45,18 +45,20 @@ class EightPuzzleState(State):
             possible.append('right')
             
         #up
-        if num < 2:
+        if num > 2:
             possible.append('up')
         
         #down
-        if num > 5:
+        if num < 5:
             possible.append('down')
+
+        return possible
 
 
     # applies the result of the move on the current state
     def executeAction(self, move):
         
-        newState = EightPuzzleState(self.numbers)
+        newState = EightPuzzleState(self.numbers[:])
         
         if move == 'left':
             tempindex = self.numbers.index(0)
@@ -115,30 +117,32 @@ class EightPuzzleState(State):
     # returns the value of the heuristic for the current state
     # note that you can alternatively call heuristic1() and heuristic2() to test both heuristics with A*
     def heuristic(self):
-        return self.heuristic1()
-        # return self.heuristic2()
+        #return self.heuristic1()
+        return self.heuristic2()
 
 
     ## returns the value of your first heuristic for the current state
     # make sure to explain it clearly in your comment
     def heuristic1(self):
-        #this is the manhattan distnace
+        #this is the manhattan distance
         dist = 0
 
         for i in range(len(self.numbers)):
-            dist += (i%3) - (self.numbers.index(i)%3)
+            dist += abs((i%3) - (self.numbers.index(i)%3))
             
-            dist += int(i/3) - int(self.numbers.index(i)/3)
-            
-        return dist
-            
-            
+            dist += abs(int(i/3) - int(self.numbers.index(i)/3))
 
+        return dist
 
     # returns the value of your first heuristic for the current state
     # make sure to explain it clearly in your comment
-    def heuristic2(self, matrix, goal):
-        return 0
+    def heuristic2(self):
+        count = 0
+        for i in range (9):
+            if self.numbers[i]!=i:
+                count +=1
+
+        return count
 
 
 ####################### SOLVABILITY ###########################
@@ -184,7 +188,7 @@ EIGHT_PUZZLE_DATA = [[0, 1, 2, 3, 4, 5, 6, 7, 8],
                      [1, 2, 5, 7, 6, 8, 0, 4, 3],
                      [4, 6, 0, 7, 2, 8, 3, 1, 5]]
 
-puzzle_choice = EIGHT_PUZZLE_DATA[6]
+puzzle_choice = EIGHT_PUZZLE_DATA[3]
 puzzle = EightPuzzleState(puzzle_choice)
 #puzzle, puzzle_choice = randomize(puzzle)
 print('Initial Config')
