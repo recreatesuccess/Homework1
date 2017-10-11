@@ -17,14 +17,14 @@ def astar_search(initialState):
     
     Q.enqueue(T)
     
-    while !Q.isEmpty():
+    while not Q.isEmpty():
         
         v = Q.dequeue()
         
         for w in v.state.possibleActions():
             
             N = node(w,True,v.getcost()+1,v)
-            nodesvisited++
+            nodesvisited+=1
             Q.enqueue(N)
             
             if N.state.isgoal():
