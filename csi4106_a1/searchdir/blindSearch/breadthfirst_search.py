@@ -22,24 +22,24 @@ def breadthfirst_search(initialState):
     
     nodesvisited = 0
     
-    T = node (initialState)
+    T = Node (initialState)
     
     Q = Queue()
     
     Q.enqueue(T)
     
-    while !Q.isEmpty():
+    while not Q.isEmpty():
         
         v = Q.dequeue()
         
         for w in v.state.possibleActions():
             
-            N = node(v.executeAction(w),w,v.getcost()+1,v)
+            N = Node(v.executeAction(w),w,v.getcost()+1,v)
             
             if N.isRepeated():
                 continue 
                 
-            nodesvisited++
+            nodesvisited+=1
             Q.enqueue(N)
             
             if N.state.isgoal():

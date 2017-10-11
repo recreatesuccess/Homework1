@@ -104,7 +104,7 @@ class EightPuzzleState(State):
     # TO COMPLETE
         print("-----------") 
         for i in range (3):
-            print("|"+self.numbers[i*3+1]+"|"+self.numbers[i*3+2]+"|"+self.numbers[i*3+3]+"|")
+            print("|"+str(self.numbers[i*3+0])+"|"+str(self.numbers[i*3+1])+"|"+str(self.numbers[i*3+2])+"|")
         print("-----------")
 
     # returns the cost of the action in parameter

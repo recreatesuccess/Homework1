@@ -28,18 +28,18 @@ def depthfirst_search(initialState):
     
     S.push(T)
     
-    while !S.isEmpty():
+    while not S.isEmpty():
         
         v = S.pop() 
         
         for w in v.state.possibleActions():
             
-            N = node(v.executeAction(w),w,v.getcost()+1,v)
+            N = Node(v.executeAction(w),w,v.getcost()+1,v)
             
             if N.isRepeated():
                 continue 
                 
-            nodesvisited++
+            nodesvisited+=1
             S.push(N)
             
             if N.state.isgoal():
