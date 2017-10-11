@@ -39,12 +39,16 @@ def depthfirst_search(initialState):
             
             N = Node(v.state.executeAction(w),w,v.getcost()+1,v)
 
-            if N.g>900:
-                print ("recursion depth exceeded")
+            # if N.g>900:
+            #     print ("recursion depth exceeded")
+            #     return None, nodesvisited
+            try:
+                if N.isRepeated():
+                    continue
+            except RuntimeError:
+                print("recursion depth exceeded")
+                print("depth of tree: ",N.g)
                 return None, nodesvisited
-
-            if N.isRepeated():
-                continue 
                 
             nodesvisited+=1
             S.push(N)
